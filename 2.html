@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List</title>
+  <style>
+    body { background: pink; }
+    .cb:checked + .content {
+      text-decoration : line-through;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" class="input-todo" placeholder="할일">
+  <ul class="todos"></ul>
+
+  <script>
+    const $input = document.querySelector('.input-todo');
+    const $todos = document.querySelector('.todos');
+
+    $input.addEventListener('keyup', function(e) {
+      if (this.value.trim() === '' || e.keyCode !== 13) return;
+      $todos.innerHTML += `
+      <li>
+        <label>
+          <span>${this.value}</span>
+        </label>
+        <button>X</button>
+      </li>`;
+      this.value = '';
+      });
+
+      $todos.addEventListener('click', function(e) {
+        if (!e.target.classList.contains('remove')) return;
+        this.removeChild(e.target.parentNode);
+      })
+
+    </script>
+
+</body>
+</html>

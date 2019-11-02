@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List</title>
+  <style>
+    body { background: pink; }
+    .cb:checked + .content {
+      text-decoration : line-through;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" class="input-todo" placeholder="할일!">
+  <ul class="todos"></ul>
+  
+  <script>
+    const $input = document.querySelector('.input-todo');
+    const $todos = document.querySelector('.todos');
+    // const $btn = document.querySelector('.remove');
+    // console.log($btn);
+
+    $input.addEventListener('keyup', function(e) {
+      if (this.value.trim() === '' || e.keyCode !== 13) return;
+      $todos.innerHTML += `
+        <li>
+          <label>
+            <input type="checkbox" class="cb">
+            <span class="content">${this.value}</span>
+          </label>
+          <button class="remove">X</button>
+        </li>`;
+        this.value = '';
+      });
+
+      // 버튼이 눌리면, 버튼을 포함하는 <li>를 삭제
+      // 버튼이 없을 때는 '버튼이 눌리면'이라는 이벤트를
+      // 누가 들을 것이냐? -> ul($todos)가 듣는다.
+      // 그러면, eventListener를 어디에 달아야되나? -> $todos에 답니다.
+
+      // 1. 최초의 경우, <li>가 존재하지 않으므로
+      // 버블링을 활용하여 미래에 생성될 <li>의
+      // 버튼 요소가 'click'되었다는 이벤트를
+      // ul ($todos)에서 듣겠다.
+      $todos.addEventListener('click', function(e) {
+        // console.log(e.target);
+        // 2. 실질적으로 'click'이란 이벤트를
+        // 발생시킨 버튼의, 부모 <li>를 찾아서
+         if (!e.target.classList.contains('remove')) return;
+         this.removeChild(e.target.parentNode);
+        // 3. ul에서 제거한다.
+      })
+
+  </script>
+</body>
+</html>
