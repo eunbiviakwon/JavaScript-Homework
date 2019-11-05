@@ -1,20 +1,25 @@
- // 자바스크립트의 함수는 일급 객체이므로 함수의 매개변수에게 함수를 전달할 수 있다. 
+const person = [
+  {id:1, name: '성진'},
+  {id:2, name: '현진'},
+  {id:3, name: '홍빈'},
+  {id:4, name: '은비'},
+  {id:5, name: '민지'}
+];
+//배열의 요소를 참조하기 위해 사용.
+const a = person.filter((item, index) => {
+  return item.id < 5 && (index !== 2);
+})
 
- // 콜백 함수를 전달받는 함수
- function print(f) {
-   var string = 'Hello';
-   // 콜백 함수를 전달받는 함수가 콜백 함수의 호출 시기를 결정하고 호출
-   return f(string);
- }
+console.log(a);
 
- // print 함수에 콜백 함수를 전달하면서 호출
- var res1 = print(function (str) {
-   return str.toUpperCase();
- });
+const todos = [
+  { id: 1, content: 'HTML', completed: false },
+  { id: 2, content: 'CSS', completed: true },
+  { id: 3, content: 'Javascript', completed: false }
+];
 
- // print 함수에 콜백 함수를 전달하면서 호출
- var res2 = print(function (str) {
-   return str.toLowerCase();
- });
+const remove = todos.filter(item => {
+  return item.content !== 'CSS'
+})
 
- console.log(res1, res2);
+console.log(remove);
